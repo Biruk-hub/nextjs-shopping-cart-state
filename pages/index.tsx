@@ -1,14 +1,22 @@
-import type { NextPage } from 'next'
-import Head from 'next/head'
-import Image from 'next/image'
-import styles from '../styles/Home.module.css'
+import type { NextPage } from "next";
+import CartIcon from "../components/cart_icon";
+import PageWrapper from "../components/page_wraper";
+import Product from "../components/product";
+import { ProductData } from "../data/product_data";
+import CartProvider from "../provider";
 
 const Home: NextPage = () => {
+  const products = ProductData;
   return (
-    <h1 className="text-3xl font-bold underline text-red-600">
-      Hello world!
-    </h1>
-  )
-}
+    <CartProvider>
+      <PageWrapper>
+        <CartIcon />
+        {products.map((product) => {
+          return <Product key={product.id} {...product} />;
+        })}
+      </PageWrapper>
+    </CartProvider>
+  );
+};
 
-export default Home
+export default Home;
